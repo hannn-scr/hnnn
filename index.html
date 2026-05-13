@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="theme-color" content="#0a0a1a" />
+  <title>hannn</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Outfit',sans-serif;
+      background:linear-gradient(145deg,#070714 0%,#12121f 100%);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:1.5rem;
+      transition:0.3s ease;
+      position:relative;
+    }
+
+    body::before{
+      content:'';
+      position:fixed;
+      width:100%;
+      height:100%;
+      background:
+      radial-gradient(circle at 20% 30%, rgba(255,100,150,.15), transparent 60%);
+      pointer-events:none;
+      z-index:0;
+    }
+
+    /* LIGHT MODE */
+    body.light{
+      background:linear-gradient(125deg,#fff5f0,#ffe9f0);
+    }
+
+    body.light .card{
+      background:rgba(255,250,245,.85);
+      border:1px solid rgba(0,0,0,.08);
+      box-shadow:0 20px 35px rgba(0,0,0,.05);
+    }
+
+    body.light h1{
+      background:linear-gradient(135deg,#bf1b5b,#ff6f61);
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+
+    body.light .bio-text{
+      color:#3f2e3a;
+    }
+
+    body.light .badge-light{
+      background:rgba(0,0,0,.05);
+      color:#a5345a;
+    }
+
+    body.light .stat-item{
+      background:rgba(0,0,0,.04);
+      color:#4a3645;
+    }
+
+    body.light .link-card{
+      background:rgba(255,245,240,.9);
+      color:#2c1e2e;
+      border:1px solid rgba(0,0,0,.06);
+    }
+
+    body.light .link-card:hover{
+      background:#ff6f8b;
+      color:#fff;
+    }
+
+    body.light .toggle-dark{
+      background:rgba(0,0,0,.08);
+      color:#2d1f2c;
+    }
+
+    body.light .mini-footer{
+      color:#765a6b;
+    }
+
+    .card{
+      max-width:560px;
+      width:100%;
+      background:rgba(12,12,26,.65);
+      backdrop-filter:blur(18px);
+      border-radius:2rem;
+      padding:2rem 1.8rem;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 30px 45px rgba(0,0,0,.4);
+      text-align:center;
+      position:relative;
+      z-index:2;
+      transition:.2s;
+    }
+
+    .avatar-container{
+      display:flex;
+      justify-content:center;
+      margin-bottom:.75rem;
+    }
+
+    .avatar-ring{
+      background:linear-gradient(130deg,#ff99bb,#ff4d7a);
+      width:108px;
+      height:108px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 0 16px rgba(255,77,122,.5);
+    }
+
+    .avatar-ring img{
+      width:98px;
+      height:98px;
+      border-radius:50%;
+      object-fit:cover;
+      border:2px solid #fff2f5;
+    }
+
+    h1{
+      font-size:2rem;
+      font-weight:700;
+      background:linear-gradient(120deg,#ffc4d4,#ff8eae);
+      -webkit-background-clip:text;
+      color:transparent;
+      margin-top:10px;
+      letter-spacing:-0.5px;
+    }
+
+    .badge-light{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:rgba(255,255,255,.08);
+      padding:4px 14px;
+      border-radius:60px;
+      font-size:.7rem;
+      font-weight:500;
+      color:#ffc0d0;
+      margin:12px 0 6px;
+    }
+
+    .bio-text{
+      font-size:.85rem;
+      color:#cbcbe3;
+      margin:16px 0 12px;
+      line-height:1.5;
+    }
+
+    .stats-group{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin:18px 0 22px;
+    }
+
+    .stat-item{
+      background:rgba(255,255,255,.05);
+      padding:5px 12px;
+      border-radius:30px;
+      font-size:.7rem;
+      font-weight:500;
+    }
+
+    .links-wrapper{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin:26px 0 20px;
+    }
+
+    .link-card{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      background:rgba(28,28,48,.75);
+      backdrop-filter:blur(12px);
+      padding:12px 18px;
+      border-radius:60px;
+      text-decoration:none;
+      color:#f0f0fc;
+      font-weight:500;
+      transition:.2s cubic-bezier(.2,.8,.4,1);
+      border:1px solid rgba(255,255,255,.1);
+    }
+
+    .link-card i{
+      font-size:1.5rem;
+      width:32px;
+      text-align:center;
+    }
+
+    .link-name{
+      flex:1;
+      text-align:left;
+      font-size:.9rem;
+    }
+
+    .link-card:hover{
+      background:#d43f6b;
+      transform:translateY(-2px);
+      border-color:#ffb7cb;
+    }
+
+    .toggle-button{
+      display:flex;
+      justify-content:center;
+      margin:10px 0 8px;
+    }
+
+    .toggle-dark{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.2);
+      padding:8px 20px;
+      border-radius:60px;
+      font-size:.75rem;
+      font-weight:500;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      transition:.2s;
+      color:#e0e0f0;
+    }
+
+    .toggle-dark:hover{
+      background:#d43f6b;
+      border-color:#ff99bb;
+    }
+
+    .mini-footer{
+      font-size:.65rem;
+      margin-top:24px;
+      color:#8f8fb0;
+      letter-spacing:.3px;
+    }
+
+    @keyframes floatIn{
+      0%{
+        opacity:0;
+        transform:translateY(24px);
+      }
+      100%{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .card,
+    .link-card{
+      animation:floatIn .5s ease backwards;
+    }
+
+    .link-card:nth-child(1){animation-delay:.05s;}
+    .link-card:nth-child(2){animation-delay:.1s;}
+    .link-card:nth-child(3){animation-delay:.15s;}
+    .link-card:nth-child(4){animation-delay:.2s;}
+    .link-card:nth-child(5){animation-delay:.25s;}
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <div class="avatar-container">
+    <div class="avatar-ring">
+      <img src="https://files.catbox.moe/4zv8pl.jpg" alt="hannn profile">
+    </div>
+  </div>
+
+  <h1>ini hann<span style="font-weight:300;">.</span></h1>
+
+  <div class="badge-light">
+    <i class="fas fa-crown"></i>
+    <span>creator & dreamer</span>
+  </div>
+
+  <div class="bio-text">
+    crafting digital experiences, bot whisperer, design enthusiast.
+    <br>
+    “building the unusual”
+  </div>
+
+  <div class="stats-group">
+    <div class="stat-item">
+      <i class="fas fa-code"></i> Code art
+    </div>
+
+    <div class="stat-item">
+      <i class="fas fa-music"></i> Lo-fi soul
+    </div>
+
+    <div class="stat-item">
+      <i class="fas fa-camera"></i> visual
+    </div>
+  </div>
+
+  <div class="links-wrapper">
+
+    <a href="https://instagram.com/h4nn_c4" target="_blank" class="link-card">
+      <i class="fab fa-instagram" style="color:#E4405F;"></i>
+      <span class="link-name">Instagram</span>
+    </a>
+
+    <a href="https://wa.me/6283892597828" target="_blank" class="link-card">
+      <i class="fab fa-whatsapp" style="color:#25D366;"></i>
+      <span class="link-name">WhatsApp</span>
+    </a>
+
+    <a href="https://tiktok.com/@ini.hannnwoi" target="_blank" class="link-card">
+      <i class="fab fa-tiktok"></i>
+      <span class="link-name">TikTok</span>
+    </a>
+
+    <a href="https://github.com/hannn-scr" target="_blank" class="link-card">
+      <i class="fab fa-github"></i>
+      <span class="link-name">GitHub</span>
+    </a>
+
+    <a href="mailto:hannnxc5@gmail.com" class="link-card">
+      <i class="fas fa-envelope-open-text"></i>
+      <span class="link-name">Email</span>
+    </a>
+
+  </div>
+
+  <div class="toggle-button">
+    <div class="toggle-dark" id="themeSwitch">
+      <i class="fas fa-moon"></i>
+      <span>Dark mode</span>
+    </div>
+  </div>
+
+  <div class="mini-footer">
+    constantly curious — 2026
+  </div>
+
+</div>
+
+<script>
+
+const themeBtn = document.getElementById('themeSwitch');
+
+const hourNow = new Date().getHours();
+const isDarkTime = hourNow >= 19 || hourNow < 6;
+
+let storedTheme = localStorage.getItem('hannnThemeNew');
+
+function changeTheme(mode){
+
+  if(mode === 'light'){
+
+    document.body.classList.add('light');
+    document.body.classList.remove('dark');
+
+    localStorage.setItem('hannnThemeNew','light');
+
+    themeBtn.innerHTML =
+    '<i class="fas fa-sun"></i> <span>Light mode</span>';
+
+  }else{
+
+    document.body.classList.remove('light');
+    document.body.classList.add('dark');
+
+    localStorage.setItem('hannnThemeNew','dark');
+
+    themeBtn.innerHTML =
+    '<i class="fas fa-moon"></i> <span>Dark mode</span>';
+  }
+}
+
+if(storedTheme === 'light'){
+  changeTheme('light');
+
+}else if(storedTheme === 'dark'){
+  changeTheme('dark');
+
+}else{
+
+  if(isDarkTime){
+    changeTheme('dark');
+  }else{
+    changeTheme('light');
+  }
+}
+
+themeBtn.addEventListener('click',()=>{
+
+  const currentlyLight =
+  document.body.classList.contains('light');
+
+  if(currentlyLight){
+    changeTheme('dark');
+  }else{
+    changeTheme('light');
+  }
+
+});
+
+</script>
+
+</body>
+</html>
